@@ -33,7 +33,7 @@ if __name__ == "__main__":
 
     # # filter and classify trajectories
     gdf = filter(args.input)
-    predictions = classify_trajectory(gdf, 100,  'C:/Users/anape/Downloads/outsight/alb_output/geodata/model_weights.h5')
+    predictions = classify_trajectory(gdf, 100,  'model_weights.h5')
     
     x = dict(Counter(predictions))
 
@@ -41,7 +41,7 @@ if __name__ == "__main__":
     for i in sorted(x.items()):
         print(f'Path {i[0]}: {i[1]} vehicles detected')   
 
-    means = gpd.read_file("C:/Users/anape/Downloads/outsight/alb_output/geodata/means.geoJSON")
+    means = gpd.read_file("means.geoJSON")
 
     means['flow'] = means['cluster'].map(x)
 

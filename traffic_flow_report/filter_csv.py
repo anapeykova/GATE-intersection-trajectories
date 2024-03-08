@@ -43,7 +43,7 @@ def linestrings(df):
     # print(linestring_df.info())
     return linestring_df
 
-def locate(df, zones="C:/Users/anape/Downloads/outsight/resources/QGIS/lanes_and_int.geojson"):
+def locate(df, zones="lanes_and_int.geojson"):
     gdf = points(df)
     zones = gpd.read_file(zones)
 
