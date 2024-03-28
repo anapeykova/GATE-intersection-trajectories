@@ -9,9 +9,9 @@ This is a straightforward pipeline combining all of the processes explored in th
 
 1. First, complete trajectories are filtered out.
 2. Then, the trajectories are classified using a pre-trained RNN model.
-3. `report.py` takes the predictions from the RNN model and gives the number of vehicles which took certain paths. The results are printed out in terminal and visualized in a `folium` heatmap (opened as html in browser).
+3. `report.py` takes the predictions from the RNN model and gives the number of vehicles which took certain paths. The results are printed out in terminal and visualized in a `folium` heatmap (opened as html in browser). See sample output <a href="https://github.com/anapeykova/GATE-intersection-trajectories/maps/kmedoids_clusters_folium.html">here</a>.
 
-### Use
+#### Use
 1. Navigate to traffic_flow_report/
 2. Run the report script with a .csv file as an argument (`sample.csv` file available)
 
@@ -19,13 +19,14 @@ This is a straightforward pipeline combining all of the processes explored in th
 cd traffic_flow_report
 python -m report "sample.csv"
 ```
-### Demo
+#### Demo
 https://www.loom.com/share/fdc6bc6e4319486a880d2d1eb0014899?sid=686fa7aa-fba7-4795-a929-906820a79ee7
 
 
-## capstone notebooks
+
+## Capstone notebooks
 #### aggregate_and_cluster
-In this notebook, I combine the sample datasets from the LiDAR and filter trajectories based on semantic map ('traffic_flow_report/lanes_and_int.geojson'). Trajectories are manually split by incoming lane, then clustered using k-medoids with Hausdorff distance; model performance is evaluated through visualizations and appropriate metrics. The labeled trajectories are saved as file and visualized in an interactive `folium` map.
+In this notebook, I combine the sample datasets from the LiDAR and filter trajectories based on semantic map ('traffic_flow_report/lanes_and_int.geojson'). Trajectories are manually split by incoming lane, then clustered using k-medoids with Hausdorff distance; model performance is evaluated through visualizations and appropriate metrics. The labeled trajectories are saved as file and visualized in an interactive `folium` <a href="https://github.com/anapeykova/GATE-intersection-trajectories/maps/kmedoids_clusters_folium.html"> map</a>.
 
 #### dbscan_hausdorff
 In this notebook, I implement and evaluate another clustering method, DBSCAN. The algorithm is density-based and offers the advantage of noise detection: that is, trajectories are not forced into clusters;  instead, they can be labeled as noise, denoted by class '-1'. The implementation clusters all trajectories simultaneously, unlike the k-medoids approach where trajectories are first split into four groups. However, the results are worse than k-medoids as using the same distance measure - Hausdorff distance - does not allow the algorithm to distinguish between trajectories that are spatially close but moving in opposite directions.
@@ -34,7 +35,7 @@ In this notebook, I implement and evaluate another clustering method, DBSCAN. Th
 In this notebook, I implement and evaluate DBSCAN using a Frechet distance matrix. Unlike Hausdorff, the Frechet distance is directed. This is more suited for trajectory analyses but it does come at a higher computational cost. The model parameters (eps and MinPts) are tuned using grid search to find the optimal number of clusters and noise. Possibly due to different densities, performance is not comparable to the more manual approach taken with k-medoids.
 
 #### means
-Based on the clusters derived from k-medoids, a model intersection is constructed using the means of each cluster. This model ('traffic_flow_report/means.geoJSON') is used for visualization of the possible paths at the intersection.
+Based on the clusters derived from k-medoids, a model intersection is constructed using the means of each cluster. This model ('/traffic_flow_report/means.geoJSON') is used for visualization of the possible paths at the intersection.
 
 #### augmentation_sampling
 The labeled trajectory dataset is augmented using interpolation to increase the number of points by a factor of n; the interpolated trajectories are then uniformly sampled to derive n new trajectories from each. The output is a large, labeled dataset used for training an RNN model.
