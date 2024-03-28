@@ -9,7 +9,7 @@ This is a straightforward pipeline combining all of the processes explored in th
 
 1. First, complete trajectories are filtered out.
 2. Then, the trajectories are classified using a pre-trained RNN model.
-3. `report.py` takes the predictions from the RNN model and gives the number of vehicles which took certain paths. The results are printed out in terminal and visualized in a `folium` heatmap (opened as html in browser). See sample output <a href="https://github.com/anapeykova/GATE-intersection-trajectories/maps/kmedoids_clusters_folium.html">here</a>.
+3. `report.py` takes the predictions from the RNN model and gives the number of vehicles which took certain paths. The results are printed out in terminal and visualized in a `folium` heatmap (opened as html in browser). See sample output <a href="https://anapeykova.github.io/GATE-intersection-trajectories/maps/report_sample_output_map.html">here</a>.
 
 #### Use
 1. Navigate to traffic_flow_report/
@@ -26,7 +26,7 @@ https://www.loom.com/share/fdc6bc6e4319486a880d2d1eb0014899?sid=686fa7aa-fba7-47
 
 ## Capstone notebooks
 #### aggregate_and_cluster
-In this notebook, I combine the sample datasets from the LiDAR and filter trajectories based on semantic map ('traffic_flow_report/lanes_and_int.geojson'). Trajectories are manually split by incoming lane, then clustered using k-medoids with Hausdorff distance; model performance is evaluated through visualizations and appropriate metrics. The labeled trajectories are saved as file and visualized in an interactive `folium` <a href="https://github.com/anapeykova/GATE-intersection-trajectories/maps/kmedoids_clusters_folium.html"> map</a>.
+In this notebook, I combine the sample datasets from the LiDAR and filter trajectories based on semantic map ('traffic_flow_report/lanes_and_int.geojson'). Trajectories are manually split by incoming lane, then clustered using k-medoids with Hausdorff distance; model performance is evaluated through visualizations and appropriate metrics. The labeled trajectories are saved as file and visualized in an interactive `folium` <a href="https://anapeykova.github.io/GATE-intersection-trajectories/maps/kmedoids_clusters_folium.html"> map</a>.
 
 #### dbscan_hausdorff
 In this notebook, I implement and evaluate another clustering method, DBSCAN. The algorithm is density-based and offers the advantage of noise detection: that is, trajectories are not forced into clusters;  instead, they can be labeled as noise, denoted by class '-1'. The implementation clusters all trajectories simultaneously, unlike the k-medoids approach where trajectories are first split into four groups. However, the results are worse than k-medoids as using the same distance measure - Hausdorff distance - does not allow the algorithm to distinguish between trajectories that are spatially close but moving in opposite directions.
