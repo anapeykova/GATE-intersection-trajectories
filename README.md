@@ -37,6 +37,8 @@ In this notebook, I implement and evaluate DBSCAN using a Frechet distance matri
 #### means
 Based on the clusters derived from k-medoids, a model intersection is constructed using the means of each cluster. This model ('/traffic_flow_report/means.geoJSON') is used for visualization of the possible paths at the intersection.
 
+Afterwards, I looked into distance from mean for each trajectory in the cluster as exploratory analysis and attempted to extend the mean trajectories using curve fitting. These were not referenced in my write-up but I kept them here for completeness.
+
 #### augmentation_sampling
 The labeled trajectory dataset is augmented using interpolation to increase the number of points by a factor of n; the interpolated trajectories are then uniformly sampled to derive n new trajectories from each. The output is a large, labeled dataset used for training an RNN model.
 
