@@ -3,25 +3,30 @@
 A project on traffic trajectory analysis using machine learning. The data originates from a 6-LiDAR system set up at the intersection of Cherni Vruh Blvd and Sreburna St in Sofia, Bulgaria. Initially stored as binary .osef files, the data is accessed via TCP stream (using VPN) and subsequently parsed into .csv format. Each row within the .csv file represents the timestamped location of an object detected at the intersection. Objects are identified by unique `object_id`; grouping by `object_id` and ordering by timestamp allows the reconstruction of the object's trajectory. 
 
 
-
 ## traffic_flow_report
-This is a straightforward pipeline combining all of the processes explored in the notebooks below. It takes a .csv file of the LiDAR output and produces a simple traffic flow heatmap.
+This is a straightforward pipeline combining all of the processes explored in the notebooks below. It takes a .csv file of the LiDAR output and produces a simple report (pdf) and path heatmap (opened in browser).
 
 1. First, complete trajectories are filtered out.
 2. Then, the trajectories are classified using a pre-trained RNN model.
-3. `report.py` takes the predictions from the RNN model and gives the number of vehicles which took certain paths. The results are printed out in terminal and visualized in a `folium` heatmap (opened as html in browser). See sample output <a href="https://anapeykova.github.io/GATE-intersection-trajectories/maps/report_sample_output_map.html">here</a>.
+3. `report.py` takes the predictions from the RNN model and performs simple analysis about vehicles per path. The results are visualized in a `folium` heatmap (opened as html in browser). The function also creates a .pdf file with visualizations of RNN output and busiest origin/destination streets. See sample outputs for a <a href="https://anapeykova.github.io/GATE-intersection-trajectories/maps/report_sample_output_map.html">map</a> and a <a href='https://anapeykova.github.io/GATE-intersection-trajectories/traffic_flow_report/output/report.pdf'>report</a>.
 
 #### Use
-1. Navigate to traffic_flow_report/
-2. Run the report script with a .csv file as an argument (`sample.csv` file available)
-
+1. Pull repositoty, create a virtual environment and install dependencies from requirements file. I recommend using Python 3.10.
+2. Navigate to traffic_flow_report/
 ```
 cd traffic_flow_report
-python -m report "sample.csv"
+```
+3. Run the report script with a .csv to analyze as an argument (`sample1.csv` and `sample2.csv` files available in `resources/`) and a path to .pdf to save the report.
+
+```
+python -m report "resources/sample1.csv" --output "myreport.pdf"
+```
+If output path is not provided, the report is saved by default at `output/report.pdf`.
+```
+python -m report "resources/sample1.csv"
 ```
 #### Demo
 https://www.loom.com/share/fdc6bc6e4319486a880d2d1eb0014899?sid=686fa7aa-fba7-4795-a929-906820a79ee7
-
 
 
 ## Capstone notebooks
