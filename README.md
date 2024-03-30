@@ -26,8 +26,7 @@ If output path is not provided, the report is saved by default at `output/report
 python -m report "resources/sample1.csv"
 ```
 #### Demo
-https://www.loom.com/share/fdc6bc6e4319486a880d2d1eb0014899?sid=686fa7aa-fba7-4795-a929-906820a79ee7
-
+https://www.loom.com/share/feeb2f84c0ff468a9a04c0d9e43290a3?sid=4cb8a2bd-6e75-4cb6-b630-1161b2b47387 
 
 ## Capstone notebooks
 #### aggregate_and_cluster
